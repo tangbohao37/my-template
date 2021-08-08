@@ -1,0 +1,34 @@
+{
+  "name": "lib-template",
+  "version": "1.0.0",
+  "description": "template",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "scripts": {
+    "dev": "dumi dev",
+    "lint": "eslint . --ext=.js,.ts,.tsx --fix",
+    "build": "npm run build:es & npm run build:commonjs",
+    "postbuild": "npm run build:types",
+    "build:es": "babel src -d es --extensions .ts,.tsx --delete-dir-on-start",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src -d lib --extensions .ts,.tsx --delete-dir-on-start",
+    "build:types": "tsc --declarationDir es & tsc --declarationDir lib",
+    "build:docs": "dumi build",
+    "preversion": "npm run build"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "author": "",
+  "license": "MIT",
+  "prettier": "@baertang/prettier-config",
+  "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@baertang/babel-preset-lib": "0.0.5-alpha.0",
+    "@baertang/eslint-config": "0.0.5-alpha.0",
+    "@baertang/prettier-config": "0.0.5-alpha.0",
+    "@baertang/stylelint-config": "0.0.5-alpha.0",
+    "cross-env": "^7.0.3",
+    "dumi": "^1.1.18",
+    "typescript": "^3.9.10"
+  }
+}
